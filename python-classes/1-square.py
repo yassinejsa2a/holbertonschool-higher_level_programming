@@ -3,6 +3,7 @@
 1-square.py - This module defines a Square class with a private size attribute.
 """
 
+
 class Square:
     """
     Represents a square.
