@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+<<<<<<< HEAD
 """
 3-square.py - This module defines a Square class with size validation
 and a method to calculate the area of the square.
@@ -24,12 +25,26 @@ class Square:
             ValueError: If size is less than 0.
         """
         if not isinstance(size, int):
+=======
+"""Module that defines a Square classe"""
+
+
+class Square:
+    """Class that defines a square"""
+    def __init__(self, size=0):
+        """Initialize square with given size
+        Args:
+            size: size of the square
+        """
+        self.__size = size
+        if type(size) is not int:
+>>>>>>> 5260abd10151aa04c170d5ce7526638bf0ff74d3
             raise TypeError("size must be an integer")
         if size < 0:
             raise ValueError("size must be >= 0")
-        self.__size = size
 
     def area(self):
+<<<<<<< HEAD
         """
         Calculate the area of the square.
 
@@ -38,3 +53,7 @@ class Square:
         """
         return self.__size ** 2
     
+=======
+        """Returns The area of the square"""
+        return self.__size ** 2
+>>>>>>> 5260abd10151aa04c170d5ce7526638bf0ff74d3
