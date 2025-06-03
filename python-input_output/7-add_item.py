@@ -1,18 +1,17 @@
 #!/usr/bin/python3
+"""
+add_item
+"""
+import sys
+save_to_json_file = __import__('5-save_to_json_file').save_to_json_file
+load_from_json_file = __import__('6-load_from_json_file').load_from_json_file
 
+try:
+    my_list = load_from_json_file("add_item.json")
+except Exception as e:
+    my_list = []
 
-import json
-from 5-save_to_json_file.py import save_to_json_file
-from 6-load_from_json_file.py import load_from_json_file
+if len(sys.argv) > 1:
+    my_list.extend(sys.argv[1:])
 
-
-filename = "add_item.json"
-def add_item(item):
-    """Add an item to a JSON file."""
-    try:
-        items = load_from_json_file(filename)
-    except FileNotFoundError:
-        items = []
-
-    items.append(item)
-    save_to_json_file(items, filename)
+save_to_json_file(my_list, "add_item.json")
