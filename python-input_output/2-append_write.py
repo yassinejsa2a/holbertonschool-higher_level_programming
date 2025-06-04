@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""Module for reading and printing a UTF-8 text file."""
 
 
 def append_write(filename="", text=""):
