@@ -1,26 +1,34 @@
 #!/usr/bin/python3
 """
-Module to list all cities from a database
+Script that lists all cities from the database hbtn_0e_4_usa
+Takes 3 arguments: mysql username, mysql password and database name
 """
-import sys
 import MySQLdb
+from sys import argv
+
 
 if __name__ == "__main__":
     db = MySQLdb.connect(
         host="localhost",
-        user=sys.argv[1],
-        passwd=sys.argv[2],
-        db=sys.argv[3],
-        port=3306
+        port=3306,
+        user=argv[1],
+        passwd=argv[2],
+        db=argv[3]
     )
-    cursor = db.cursor()
-    cursor.execute("SELECT cities.id, cities.name, states.name FROM cities \
-                    JOIN states ON cities.state_id = states.id \
-                    ORDER BY cities.id ASC")
-    rows = cursor.fetchall()
+
+    cur = db.cursor()
+
+    cur.execute("""
+        SELECT cities.id, cities.name, states.name
+        FROM cities
+        JOIN states ON cities.state_id = states.id
+        ORDER BY cities.id ASC
+    """)
+
+    rows = cur.fetchall()
 
     for row in rows:
         print(row)
 
-    cursor.close()
+    cur.close()
     db.close()
