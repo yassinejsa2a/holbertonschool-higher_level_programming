@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 """
-Script that lists all cities from the database hbtn_0e_4_usa
-Takes 3 arguments: mysql username, mysql password and database name
+Script that takes in an argument and displays
+all values in the states table where name matches the argument.
+Takes 4 arguments: mysql username, mysql password,
+database name and state name searched.
 """
 import MySQLdb
 from sys import argv
@@ -18,12 +20,8 @@ if __name__ == "__main__":
 
     cur = db.cursor()
 
-    cur.execute("""
-        SELECT cities.id, cities.name, states.name
-        FROM cities
-        JOIN states ON cities.state_id = states.id
-        ORDER BY cities.id ASC
-    """)
+    cur.execute(
+        "SELECT * FROM states WHERE name = %s ORDER BY id ASC", (argv[4],))
 
     rows = cur.fetchall()
 
