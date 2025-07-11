@@ -1,26 +1,32 @@
 #!/usr/bin/python3
 """
-Module to list all states from a database
+Script that takes in an argument and displays
+all values in the states table where name matches the argument.
+Takes 4 arguments: mysql username, mysql password,
+database name and state name searched.
 """
-
-import sys
 import MySQLdb
+from sys import argv
+
 
 if __name__ == "__main__":
     db = MySQLdb.connect(
         host="localhost",
-        user=sys.argv[1],
-        passwd=sys.argv[2],
-        db=sys.argv[3],
-        port=3306
+        port=3306,
+        user=argv[1],
+        passwd=argv[2],
+        db=argv[3]
     )
-    cursor = db.cursor()
-    cursor.execute("SELECT * FROM states \
-                   WHERE name = %s ORDER BY id ASC;", (sys.argv[4],))
-    rows = cursor.fetchall()
+
+    cur = db.cursor()
+
+    cur.execute(
+        "SELECT * FROM states WHERE name = %s ORDER BY id ASC", (argv[4],))
+
+    rows = cur.fetchall()
 
     for row in rows:
         print(row)
 
-    cursor.close()
+    cur.close()
     db.close()
